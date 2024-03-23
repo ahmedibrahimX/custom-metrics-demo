@@ -2,12 +2,14 @@ package com.example.custommetricsdemo.service;
 
 import com.example.custommetricsdemo.infrastructure.Order;
 import com.example.custommetricsdemo.infrastructure.OrderRepo;
+import io.micrometer.core.instrument.Counter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class OrderService {
-    private OrderRepo repo;
+    private final OrderRepo repo;
+
     @Autowired
     public OrderService(OrderRepo repo) {
         this.repo = repo;
