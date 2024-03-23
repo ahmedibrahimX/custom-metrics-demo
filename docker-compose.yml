@@ -1,0 +1,28 @@
+version: '3.8'
+
+networks:
+  my-bridged-network:
+    driver: bridge
+
+services:
+  my-postgres-db:  # Custom name for the database container
+    container_name: my-postgres-db
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: demo
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+    ports:
+      - "5432:5432" # Default Postgres port
+    networks:
+      - my-bridged-network
+
+  app:
+    container_name: my-app
+    build: .
+    ports:
+      - "8080:8080" # Default Spring Boot port
+    networks:
+      - my-bridged-network
+    depends_on:
+      - my-postgres-db  # Use the custom service name here
