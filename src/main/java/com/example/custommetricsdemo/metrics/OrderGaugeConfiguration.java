@@ -8,11 +8,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class OrderMetricsConfiguration {
+public class OrderGaugeConfiguration {
     private final OrderRepo orderRepo;
 
     @Autowired
-    public OrderMetricsConfiguration(OrderRepo orderRepo) {
+    public OrderGaugeConfiguration(OrderRepo orderRepo) {
         this.orderRepo = orderRepo;
     }
 
