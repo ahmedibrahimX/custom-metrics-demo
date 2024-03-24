@@ -26,3 +26,25 @@ services:
       - my-bridged-network
     depends_on:
       - my-postgres-db  # Use the custom service name here
+
+  prometheus:
+    container_name: my-prometheus
+    image: prom/prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro  # Mount your configuration file
+    ports:
+      - "9090:9090"
+    networks:
+      - my-bridged-network
+    depends_on:
+      - app
+
+  garfana:
+    container_name: my-grafana
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    networks:
+      - my-bridged-network
+    depends_on:
+      - prometheus
